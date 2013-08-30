@@ -39,5 +39,15 @@ http {
 			proxy_redirect off;
 			proxy_pass http://app_server;
 		}
+
+		location ~* ^/assets/ {
+      expires 1y;
+      add_header Cache-Control public;
+
+      if ($request_filename ~* ^.*?\.(eot)|(ttf)|(woff)|(svg)|(otf)$){
+         add_header Access-Control-Allow-Origin *;
+      }
+      break;
+	  }
 	}
 }
